@@ -5,7 +5,7 @@ services:
       args:
         IGNITION_VERSION: 8.1.48
     hostname: gw
-    container_name: tkt_gw
+    container_name: tkt_gateway
     ports:
       - 9078:8088
     volumes:
