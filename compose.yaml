@@ -3,7 +3,7 @@ services:
     build:
       context: gw-build
       args:
-        IGNITION_VERSION: 8.1.48
+        IGNITION_VERSION: 8.3
     hostname: gw
     container_name: tkt_gateway
     ports:
