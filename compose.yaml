@@ -1,0 +1,63 @@
+services:
+  tkt_gateway:
+    build:
+      context: gw-build
+      args:
+        IGNITION_VERSION: 8.1.48
+    hostname: gw
+    container_name: tkt_gw
+    ports:
+      - 9078:8088
+    volumes:
+      - tkt-data:/usr/local/bin/ignition/data
+     # - ./gw-init/gateway.gwbk:/restore.gwbk
+     # - ./gw-init/gateway-uuid.txt:/usr/local/bin/ignition/data/.uuid
+     # - ./gw-init/gateway-metro-keystore:/usr/local/bin/ignition/data/local/metro-keystore
+    networks:
+      - tkt-network
+    environment:
+      - IGNITION_EDITION=standard
+      - GATEWAY_ADMIN_PASSWORD=katlego
+      - ACCEPT_IGNITION_EULA=Y
+    labels:
+      tsdproxy.enable: true
+      tsdproxy.ephemeral: false
+    restart: unless-stopped
+    command: >
+      -n gw
+      -m 2048
+#      -r /restore.gwbk
+ # sqldb:
+ #   image: mcr.microsoft.com/mssql/server:2019-latest
+ #   environment:
+  #    - ACCEPT_EULA=Y
+   #   - MSSQL_SA_PASSWORD=yourStrong(!)Password
+    #  - MSSQL_PID=Developer
+   # ports:
+   #   - 1437:1433
+   # volumes:
+   #   - sqldb-data:/var/opt/mssql
+   # restart: always
+   # networks:
+   #   gw-network:
+    #    aliases:
+     #     - main-db  
+ # goud_smtp:
+  #  image: dockage/mailcatcher:0.8.2
+   # container_name: smtp_gold
+    #labels:
+    #  tsdproxy.enable: true
+    #  tsdproxy.ephemeral: false
+    #  restart: unless-stopped
+   # ports:
+   #   - 1083:1080
+  #    - 1028:1025
+  #  networks:
+   #   gw-network:
+    #    aliases:
+    #      - mail-srv
+networks:
+  tkt-network:
+volumes:
+  tkt-data:
+ # sqldb-data:
