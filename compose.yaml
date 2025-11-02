@@ -5,7 +5,7 @@ services:
       args:
         IGNITION_VERSION: 8.3.0
     hostname: gw
-    container_name: latest-release
+    container_name: ignition-latest
     ports:
       - 9078:8088
     volumes:
